@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/*
+ *   Day 6: Review
+ * */
 public class DaySix {
 
     public static void main(String[] args) {
@@ -20,8 +23,8 @@ public class DaySix {
         }
 
         for (String s : inputs) {
-            evens = new StringBuilder("");
-            odds = new StringBuilder("");
+            evens = new StringBuilder();
+            odds = new StringBuilder();
             for (int i = 0; i < s.length(); i++) {
                 if ((i + 1) % 2 == 0)
                     evens.append(s.charAt(i));
