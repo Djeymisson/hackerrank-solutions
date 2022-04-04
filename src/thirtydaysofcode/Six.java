@@ -1,4 +1,4 @@
-package thirtydaycode;
+package thirtydaysofcode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.Scanner;
 /*
  *   Day 6: Review
  * */
-public class DaySix {
+public class Six {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);

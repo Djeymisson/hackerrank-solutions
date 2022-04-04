@@ -1,4 +1,4 @@
-package thirtydaycode;
+package thirtydaysofcode;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -8,7 +8,7 @@ import java.util.Scanner;
 /*
 *   Day 18: Queues and Stacks
 * */
-public class DayEighteen {
+public class Eighteen {
     Queue<Character> queue = new LinkedList<>();
     Deque<Character> stack = new LinkedList<>();
 
@@ -21,7 +21,7 @@ public class DayEighteen {
         char[] s = input.toCharArray();
 
         // Create a Solution object:
-        DayEighteen p = new DayEighteen();
+        Eighteen p = new Eighteen();
 
         // Enqueue/Push all chars to their respective data structures:
         for (char c : s) {

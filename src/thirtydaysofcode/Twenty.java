@@ -1,4 +1,4 @@
-package thirtydaycode;
+package thirtydaysofcode;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 /*
  *   Day 20: Sorting (Bubble Sort)
  * */
-public class DayTwenty {
+public class Twenty {
 
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
