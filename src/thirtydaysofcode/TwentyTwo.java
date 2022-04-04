@@ -24,19 +24,14 @@ class TwentyTwo {
     }
 
     public static Node insert(Node root, int data) {
-        if (root == null) {
-            return new Node(data);
-        } else {
-            Node cur;
-            if (data <= root.data) {
-                cur = insert(root.left, data);
-                root.left = cur;
-            } else {
-                cur = insert(root.right, data);
-                root.right = cur;
-            }
-            return root;
-        }
+        if (root == null) return new Node(data);
+
+        if (data <= root.data)
+            root.left = insert(root.left, data);
+        else
+            root.right = insert(root.right, data);
+
+        return root;
     }
 
     public static void main(String[] args) {
