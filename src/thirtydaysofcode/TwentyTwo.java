@@ -2,17 +2,6 @@ package thirtydaysofcode;
 
 import java.util.Scanner;
 
-class Node {
-    Node left;
-    Node right;
-    int data;
-
-    Node(int data) {
-        this.data = data;
-        left = right = null;
-    }
-}
-
 /*
  *   Day 22: Binary Search Trees
  * */
@@ -46,3 +35,4 @@ class TwentyTwo {
         System.out.println(height);
     }
 }
+
