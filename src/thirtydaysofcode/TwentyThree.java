@@ -8,43 +8,27 @@ import java.util.*;
 class TwentyThree {
 
     static void levelOrder(Node root) {
-        Map<Integer, List<Integer>> map = new TreeMap<>();
-        byLevel(map, root, 1);
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
 
-        StringBuilder sb = new StringBuilder();
-        for (List<Integer> list : map.values()) {
-            for (Integer i : list) {
-                sb.append(i);
-                sb.append(" ");
-            }
+        while (!queue.isEmpty()) {
+            Node curr = queue.remove();
+            System.out.printf("%d ", curr.data);
+
+            if (curr.left != null) queue.add(curr.left);
+            if (curr.right != null) queue.add(curr.right);
         }
-
-        System.out.println(sb);
-    }
-
-    private static void byLevel(Map<Integer, List<Integer>> map, Node root, int level) {
-        if (root == null) return;
-
-        map.computeIfAbsent(level, integer -> new ArrayList<>()).add(root.data);
-
-        byLevel(map, root.left, ++level);
-        byLevel(map, root.right, ++level);
     }
 
     public static Node insert(Node root, int data) {
-        if (root == null) {
-            return new Node(data);
-        } else {
-            Node cur;
-            if (data <= root.data) {
-                cur = insert(root.left, data);
-                root.left = cur;
-            } else {
-                cur = insert(root.right, data);
-                root.right = cur;
-            }
-            return root;
-        }
+        if (root == null) return new Node(data);
+
+        if (data <= root.data)
+            root.left = insert(root.left, data);
+        else
+            root.right = insert(root.right, data);
+
+        return root;
     }
 
     public static void main(String[] args) {
