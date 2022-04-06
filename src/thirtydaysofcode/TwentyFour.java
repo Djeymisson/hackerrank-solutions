@@ -23,7 +23,6 @@ public class TwentyFour {
             Node start = head;
             while (start.next != null) start = start.next;
             start.next = p;
-
         }
         return head;
     }
