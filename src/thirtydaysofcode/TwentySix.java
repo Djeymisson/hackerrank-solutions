@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
+
 /*
  *   Day 26: Nested Logic
  * */
-import static java.util.stream.Collectors.toList;
-
 public class TwentySix {
 
     public static void main(String[] args) {
