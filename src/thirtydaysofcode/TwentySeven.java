@@ -2,6 +2,8 @@ package thirtydaysofcode;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /*
  * Day 27: Testing
@@ -20,89 +22,53 @@ import java.util.LinkedHashSet;
  *
  * Take a look at the code template to see the exact implementation of functions that your colleague already implemented.
  *
- * WARNING: this code doesn't work on Java 11
  * */
 public class TwentySeven {
 
-    public static int minimum_index(int[] seq) {
+    public static int minimumIndex(int[] seq) {
         if (seq.length == 0) {
             throw new IllegalArgumentException("Cannot get the minimum value index from an empty sequence");
         }
-        int min_idx = 0;
+        int minIdx = 0;
         for (int i = 1; i < seq.length; ++i) {
-            if (seq[i] < seq[min_idx]) {
-                min_idx = i;
+            if (seq[i] < seq[minIdx]) {
+                minIdx = i;
             }
         }
-        return min_idx;
+        return minIdx;
     }
 
-    static class TestDataEmptyArray {
-        public static int[] get_array(){
-            return new int[0];
-        }
-    }
-
-    static class TestDataUniqueValues {
-
-        static int[] arr = {49, 13, 26};
-        static final int MIN_INDEX = 1;
-
-        public static int[] get_array(){
-            return arr;
-        }
-
-        public static int get_expected_result() {
-            return MIN_INDEX;
-        }
-    }
-
-    static class TestDataExactlyTwoDifferentMinimums {
-        static int[] arr = {49, 7, 7};
-        static final int MIN_INDEX = 1;
-
-        public static int[] get_array(){
-            return arr;
-        }
-
-        public static int get_expected_result() {
-            return MIN_INDEX;
-        }
-    }
-
-    public static void TestWithEmptyArray() {
+    public static void testWithEmptyArray() {
         try {
-            int[] seq = TestDataEmptyArray.get_array();
-            int result = minimum_index(seq);
+            int[] seq = TestDataEmptyArray.getArray();
+            minimumIndex(seq);
         } catch (IllegalArgumentException e) {
             return;
         }
         throw new AssertionError("Exception wasn't thrown as expected");
     }
 
-    public static void TestWithUniqueValues() {
-        int[] seq = TestDataUniqueValues.get_array();
+    public static void testWithUniqueValues() {
+        int[] seq = TestDataUniqueValues.getArray();
         if (seq.length < 2) {
             throw new AssertionError("less than 2 elements in the array");
         }
 
-        Integer[] tmp = new Integer[seq.length];
-        for (int i = 0; i < seq.length; ++i) {
-            tmp[i] = Integer.valueOf(seq[i]);
-        }
-        if (!((new LinkedHashSet<Integer>(Arrays.asList(tmp))).size() == seq.length)) {
+        final List<Integer> tmp = Arrays.stream(seq).boxed().collect(Collectors.toList());
+
+        if ((new LinkedHashSet<Integer>(tmp)).size() != seq.length) {
             throw new AssertionError("not all values are unique");
         }
 
-        int expected_result = TestDataUniqueValues.get_expected_result();
-        int result = minimum_index(seq);
-        if (result != expected_result) {
+        int expectedResult = TestDataUniqueValues.getExpectedResult();
+        int result = minimumIndex(seq);
+        if (result != expectedResult) {
             throw new AssertionError("result is different than the expected result");
         }
     }
 
-    public static void TestWithExactlyTwoDifferentMinimums() {
-        int[] seq = TestDataExactlyTwoDifferentMinimums.get_array();
+    public static void testWithExactlyTwoDifferentMinimums() {
+        int[] seq = TestDataExactlyTwoDifferentMinimums.getArray();
         if (seq.length < 2) {
             throw new AssertionError("less than 2 elements in the array");
         }
@@ -113,17 +79,49 @@ public class TwentySeven {
             throw new AssertionError("there are not exactly two minimums in the array");
         }
 
-        int expected_result = TestDataExactlyTwoDifferentMinimums.get_expected_result();
-        int result = minimum_index(seq);
-        if (result != expected_result) {
+        int expectedResult = TestDataExactlyTwoDifferentMinimums.getExpectedResult();
+        int result = minimumIndex(seq);
+        if (result != expectedResult) {
             throw new AssertionError("result is different than the expected result");
         }
     }
 
     public static void main(String[] args) {
-        TestWithEmptyArray();
-        TestWithUniqueValues();
-        TestWithExactlyTwoDifferentMinimums();
+        testWithEmptyArray();
+        testWithUniqueValues();
+        testWithExactlyTwoDifferentMinimums();
         System.out.println("OK");
+    }
+
+    static class TestDataEmptyArray {
+        public static int[] getArray() {
+            return new int[0];
+        }
+    }
+
+    static class TestDataUniqueValues {
+        static final int MIN_INDEX = 1;
+        static int[] arr = {49, 13, 26};
+
+        public static int[] getArray() {
+            return arr;
+        }
+
+        public static int getExpectedResult() {
+            return MIN_INDEX;
+        }
+    }
+
+    static class TestDataExactlyTwoDifferentMinimums {
+        static final int MIN_INDEX = 1;
+        static int[] arr = {49, 7, 7};
+
+        public static int[] getArray() {
+            return arr;
+        }
+
+        public static int getExpectedResult() {
+            return MIN_INDEX;
+        }
     }
 }
