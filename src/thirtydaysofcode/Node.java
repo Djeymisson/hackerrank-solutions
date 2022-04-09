@@ -1,6 +1,7 @@
 package thirtydaysofcode;
+
 /*
-* Node class for challenges 22 and 23
+*   Node class for challenges 22 and 23
 * */
 class Node {
     Node left;
