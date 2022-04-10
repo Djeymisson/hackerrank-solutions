@@ -15,25 +15,24 @@ public class TwentyEight {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = Integer.parseInt(bufferedReader.readLine().trim());
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
 
         List<String> gmailUsers = new ArrayList<>();
 
-        IntStream.range(0, N).forEach(NItr -> {
+        IntStream.range(0, n).forEach(nItr -> {
+            String[] firstMultipleInput = new String[0];
             try {
-                String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
-
-                String firstName = firstMultipleInput[0];
-
-                String emailID = firstMultipleInput[1];
-
-                if (emailID.matches("^[a-z.]+@gmail.com$")) {
-                    gmailUsers.add(firstName);
-                }
-
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+            String firstName = firstMultipleInput[0];
+
+            String emailID = firstMultipleInput[1];
+
+            if (emailID.matches("^[a-z.]+@gmail.com$")) gmailUsers.add(firstName);
+
         });
 
         Collections.sort(gmailUsers);
