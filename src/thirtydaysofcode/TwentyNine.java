@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.stream.IntStream;
 
 class Result {
+    private Result() { }
 
     /*
      * Complete the 'bitwiseAnd' function below.
@@ -16,9 +17,9 @@ class Result {
      *  2. INTEGER K
      */
 
-    public static int bitwiseAnd(int N, int K) {
-        int endSet = N + 1;
-        return IntStream.range(1, endSet).reduce(0, (p, c) -> IntStream.range(c + 1, endSet).reduce(p, (p1, c1) -> ((c & c1) < K) ? Math.max((c & c1), p1) : p1));
+    public static int bitwiseAnd(int n, int k) {
+        int endSet = n + 1;
+        return IntStream.range(1, endSet).reduce(0, (p, c) -> IntStream.range(c + 1, endSet).reduce(p, (p1, c1) -> ((c & c1) < k) ? Math.max((c & c1), p1) : p1));
     }
 
 }
@@ -41,7 +42,7 @@ public class TwentyNine {
 
                 System.out.println(res);
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                ex.printStackTrace();
             }
         });
 
