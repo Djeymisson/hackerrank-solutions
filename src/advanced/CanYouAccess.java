@@ -9,9 +9,9 @@ public class CanYouAccess {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             int num = Integer.parseInt(br.readLine().trim());
-            Object o;// Must be used to hold the reference of the instance of the class Solution.Inner.Private
+            Inner.Private o = new Inner().new Private(); // Must be used to hold the reference of the instance of the class Solution.Inner.Private
 
-            System.out.printf("%d is %s%n", num, ((Inner.Private) (o = new Inner().new Private())).powerof2(num));
+            System.out.printf("%d is %s%n", num, o.powerof2(num));
 
             System.out.println("An instance of class: " + o.getClass().getCanonicalName() + " has been created");
 
