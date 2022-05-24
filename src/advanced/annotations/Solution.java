@@ -5,7 +5,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -39,20 +42,23 @@ public class Solution {
             String role = in.next();
             int spend = in.nextInt();
             try {
-                Class annotatedClass = FamilyMember.class;
-                Method[] methods = annotatedClass.getMethods();
-                for (Method method : methods) {
-                    if (method.isAnnotationPresent(FamilyBudget.class)) {
-                        FamilyBudget family = method.getAnnotation(FamilyBudget.class);
-                        String userRole = family.userRole();
-                        int budgetLimit = family.budgetLimit();
-                        if (userRole.equals(role)) {
-                            if (budgetLimit >= spend) {
-                                method.invoke(FamilyMember.class.newInstance(), budgetLimit, spend);
-                            } else {
-                                System.out.println("Budget Limit Over");
-                            }
-                        }
+                Class<FamilyMember> annotatedClass = FamilyMember.class;
+                List<Method> annotatedMethods = Arrays.stream(annotatedClass.getMethods())
+                        .filter(m -> m.isAnnotationPresent(FamilyBudget.class))
+                        .collect(Collectors.toList());
+
+                for (Method method : annotatedMethods) {
+                    FamilyBudget family = method.getAnnotation(FamilyBudget.class);
+                    String userRole = family.userRole();
+                    int budgetLimit = family.budgetLimit();
+
+                    if (!userRole.equals(role))
+                        continue;
+
+                    if (budgetLimit >= spend) {
+                        method.invoke(FamilyMember.class.getDeclaredConstructor().newInstance(), budgetLimit, spend);
+                    } else {
+                        System.out.println("Budget Limit Over");
                     }
                 }
             } catch (Exception e) {
