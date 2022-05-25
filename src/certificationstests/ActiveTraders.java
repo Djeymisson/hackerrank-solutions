@@ -1,4 +1,4 @@
-package tests;
+package certificationstests;
 
 import java.io.File;
 import java.io.IOException;
